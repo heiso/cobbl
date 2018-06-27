@@ -1,7 +1,8 @@
+const { gql } = require('apollo-server')
 const GraphQLJSON = require('graphql-type-json')
 const { version } = require('../../package.json')
 
-const typeDefs = `
+const typeDefs = gql`
   type Query {
     health: JSON
     version: String

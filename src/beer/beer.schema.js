@@ -1,9 +1,9 @@
+const { gql } = require('apollo-server')
 const { beerModel } = require('./beer.model')
 const { breweryModel } = require('../brewery/brewery.model')
 
-const typeDefs = `
-  type Beer {
-    _id: ID
+const typeDefs = gql`
+  type Beer @extends(type: "Resource") {
     name: String
     brewery: Brewery
   }

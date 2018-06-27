@@ -31,7 +31,8 @@ class LocalModel {
   async create (input, context) {
     input = {
       ...input,
-      _id: _.snakeCase(input.name)
+      _id: _.snakeCase(input.name),
+      createdAt: new Date()
     }
     this.store[input._id] = input
     return input
@@ -40,7 +41,8 @@ class LocalModel {
   async update (_id, input, context) {
     this.store[_id] = {
       ...this.store[_id],
-      ...input
+      ...input,
+      updatedAt: new Date()
     }
     return this.store[_id]
   }
