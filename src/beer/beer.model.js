@@ -6,7 +6,7 @@ class BeerModel extends LocalModel {
   }
 
   async drink (_id) {
-    console.log(`Yum Yum ${this.store[_id].name}`)
+    return `Gulp Gulp ${this.store[_id].name}`
   }
 }
 

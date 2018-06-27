@@ -26,6 +26,7 @@ const typeDefs = `
 
   extend type Mutation {
     createBeer(input: CreateBeerInput!): Beer
+    drinkBeer(_id: ID!): String
   }
 `
 
@@ -46,6 +47,9 @@ const resolvers = {
   Mutation: {
     async createBeer (parent, {input}, context) {
       return beerModel.create(input, context)
+    },
+    async drinkBeer (parent, {_id}, context) {
+      return beerModel.drink(_id, context)
     }
   }
 }
