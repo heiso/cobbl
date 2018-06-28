@@ -6,13 +6,13 @@ const typeDefs = gql`
   type Brewery @extends(type: "Resource") {
     name: String
     location: String
-    beers: [Beer]
+    beers(offset: Int = 0, limit: Int = 100, sort: String): PaginatedBeers
   }
 
   type PaginatedBreweries {
     options: JSON
     count: Int
-    items: [Beer]
+    items: [Brewery]
   }
 
   input CreateBreweryInput {
@@ -22,7 +22,7 @@ const typeDefs = gql`
   
   extend type Query {
     getBrewery(_id: ID!): Brewery
-    getBreweries(offset: Int, limit: Int, sort: String): PaginatedBreweries
+    getBreweries(offset: Int = 0, limit: Int = 100, sort: String): PaginatedBreweries
   }
 
   extend type Mutation {

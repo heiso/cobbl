@@ -21,7 +21,7 @@ const typeDefs = gql`
 
   extend type Query {
     getBeer(_id: ID!): Beer
-    getBeers(offset: Int, limit: Int, sort: String): PaginatedBeers
+    getBeers(offset: Int = 0, limit: Int = 100, sort: String): PaginatedBeers
   }
 
   extend type Mutation {

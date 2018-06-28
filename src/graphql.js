@@ -25,8 +25,7 @@ const graphqlServer = new ApolloServer({
   context: ({req, res}) => ({
     req,
     res
-  }),
-  tracing: true
+  })
 })
 
 module.exports = { graphqlServer }
