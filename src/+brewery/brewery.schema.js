@@ -1,18 +1,12 @@
 const { gql } = require('apollo-server')
-const { beerModel } = require('../beer/beer.model')
+const { beerModel } = require('../+beer/beer.model')
 const { breweryModel } = require('./brewery.model')
 
 const typeDefs = gql`
   type Brewery @extends(type: "Resource") {
     name: String
     location: String
-    beers(offset: Int = 0, limit: Int = 100, sort: String): PaginatedBeers
-  }
-
-  type PaginatedBreweries {
-    options: JSON
-    count: Int
-    items: [Brewery]
+    beers: [Beer]
   }
 
   input CreateBreweryInput {
@@ -21,8 +15,8 @@ const typeDefs = gql`
   }
   
   extend type Query {
-    getBrewery(_id: ID!): Brewery
-    getBreweries(offset: Int = 0, limit: Int = 100, sort: String): PaginatedBreweries
+    getBrewery(id: ID!): Brewery
+    getBreweries: [Brewery]
   }
 
   extend type Mutation {
@@ -41,7 +35,7 @@ const resolvers = {
   },
   Brewery: {
     async beers (parent, args, context) {
-      return beerModel.toMany(parent, '_id', 'brewery', args, context)
+      return beerModel.toMany(parent, 'id', 'brewery', args, context)
     }
   },
   Mutation: {

@@ -1,4 +1,4 @@
-const { LocalModel } = require('../local.model')
+const { LocalModel } = require('../shared/local.model')
 
 class BreweryModel extends LocalModel {
   constructor () {

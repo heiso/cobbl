@@ -3,13 +3,13 @@ const { ApolloServer } = require('apollo-server')
 const schemas = [
   './shared/resource.schema',
 
-  './root/root.schema',
-  './beer/beer.schema',
-  './brewery/brewery.schema'
+  './+root/root.schema',
+  './+beer/beer.schema',
+  './+brewery/brewery.schema'
 ]
 
 const directives = [
-  './directives/extends.directive'
+  './shared/extends.directive'
 ]
 
 const graphqlServer = new ApolloServer({
@@ -25,7 +25,8 @@ const graphqlServer = new ApolloServer({
   context: ({req, res}) => ({
     req,
     res
-  })
+  }),
+  tracing: true
 })
 
 module.exports = { graphqlServer }

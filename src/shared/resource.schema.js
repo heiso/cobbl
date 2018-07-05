@@ -2,7 +2,7 @@ const { gql } = require('apollo-server')
 
 const typeDefs = gql`
   type Resource {
-    _id: ID
+    id: ID
     createdAt: String
     updatedAt: String
   }
