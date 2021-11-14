@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+    "resolveJsonModule": true,
+    "target": "ESNext",
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "module": "CommonJS",
+
+    "strict": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true
+  }
+}

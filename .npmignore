@@ -1,6 +1,5 @@
 # Common generated folders
 node_modules
-dist
 generated
 coverage
 tsconfig.tsbuildinfo

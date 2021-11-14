@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Graphql-codegen-operations-tester Plugin content should match snapshot 1`] = `
+"
+export const OnCommentAddedQuerySource = \`
+subscription onCommentAdded($repoFullName: String!) {
+  commentAdded(repoFullName: $repoFullName) {
+    id
+    postedBy {
+      login
+      html_url
+    }
+    createdAt
+    content
+  }
+}\`;
+
+export function testOnCommentAddedQuery(
+  graphqlArgs: Partial<GraphQLArgs> & Pick<GraphQLArgs, 'schema'>,
+  variables?: OnCommentAddedQueryVariables
+) {
+  return graphql({ ...graphqlArgs, source: OnCommentAddedQuerySource, variableValues: variables }) as Promise<ExecutionResult<OnCommentAddedQuery>>
+};
+
+export const CommentQuerySource = \`
+fragment CommentsPageComment on Comment {
+  id
+  postedBy {
+    login
+    html_url
+  }
+  createdAt
+  content
+}query Comment($repoFullName: String!, $limit: Int, $offset: Int) {
+  currentUser {
+    login
+    html_url
+  }
+  entry(repoFullName: $repoFullName) {
+    id
+    postedBy {
+      login
+      html_url
+    }
+    createdAt
+    comments(limit: $limit, offset: $offset) {
+      ...CommentsPageComment
+    }
+    commentCount
+    repository {
+      full_name
+      html_url
+      ... on Repository {
+        description
+        open_issues_count
+        stargazers_count
+      }
+    }
+  }
+}\`;
+
+export function testCommentQuery(
+  graphqlArgs: Partial<GraphQLArgs> & Pick<GraphQLArgs, 'schema'>,
+  variables?: CommentQueryVariables
+) {
+  return graphql({ ...graphqlArgs, source: CommentQuerySource, variableValues: variables }) as Promise<ExecutionResult<CommentQuery>>
+};
+
+export const CurrentUserForProfileQuerySource = \`
+query CurrentUserForProfile {
+  currentUser {
+    login
+    avatar_url
+  }
+}\`;
+
+export function testCurrentUserForProfileQuery(
+  graphqlArgs: Partial<GraphQLArgs> & Pick<GraphQLArgs, 'schema'>,
+  variables?: CurrentUserForProfileQueryVariables
+) {
+  return graphql({ ...graphqlArgs, source: CurrentUserForProfileQuerySource, variableValues: variables }) as Promise<ExecutionResult<CurrentUserForProfileQuery>>
+};
+
+export const FeedQuerySource = \`
+fragment FeedEntry on Entry {
+  id
+  commentCount
+  repository {
+    full_name
+    html_url
+    owner {
+      avatar_url
+    }
+  }
+  ...VoteButtons
+  ...RepoInfo
+},fragment VoteButtons on Entry {
+  score
+  vote {
+    vote_value
+  }
+},fragment RepoInfo on Entry {
+  createdAt
+  repository {
+    description
+    stargazers_count
+    open_issues_count
+  }
+  postedBy {
+    html_url
+    login
+  }
+}query Feed($type: FeedType!, $offset: Int, $limit: Int) {
+  currentUser {
+    login
+  }
+  feed(type: $type, offset: $offset, limit: $limit) {
+    ...FeedEntry
+  }
+}\`;
+
+export function testFeedQuery(
+  graphqlArgs: Partial<GraphQLArgs> & Pick<GraphQLArgs, 'schema'>,
+  variables?: FeedQueryVariables
+) {
+  return graphql({ ...graphqlArgs, source: FeedQuerySource, variableValues: variables }) as Promise<ExecutionResult<FeedQuery>>
+};
+
+export const SubmitRepositoryMutationSource = \`
+mutation submitRepository($repoFullName: String!) {
+  submitRepository(repoFullName: $repoFullName) {
+    createdAt
+  }
+}\`;
+
+export function testSubmitRepositoryMutation(
+  graphqlArgs: Partial<GraphQLArgs> & Pick<GraphQLArgs, 'schema'>,
+  variables?: SubmitRepositoryMutationVariables
+) {
+  return graphql({ ...graphqlArgs, source: SubmitRepositoryMutationSource, variableValues: variables }) as Promise<ExecutionResult<SubmitRepositoryMutation>>
+};
+
+export const SubmitCommentMutationSource = \`
+fragment CommentsPageComment on Comment {
+  id
+  postedBy {
+    login
+    html_url
+  }
+  createdAt
+  content
+}mutation submitComment($repoFullName: String!, $commentContent: String!) {
+  submitComment(repoFullName: $repoFullName, commentContent: $commentContent) {
+    ...CommentsPageComment
+  }
+}\`;
+
+export function testSubmitCommentMutation(
+  graphqlArgs: Partial<GraphQLArgs> & Pick<GraphQLArgs, 'schema'>,
+  variables?: SubmitCommentMutationVariables
+) {
+  return graphql({ ...graphqlArgs, source: SubmitCommentMutationSource, variableValues: variables }) as Promise<ExecutionResult<SubmitCommentMutation>>
+};
+
+export const VoteMutationSource = \`
+mutation vote($repoFullName: String!, $type: VoteType!) {
+  vote(repoFullName: $repoFullName, type: $type) {
+    score
+    id
+    vote {
+      vote_value
+    }
+  }
+}\`;
+
+export function testVoteMutation(
+  graphqlArgs: Partial<GraphQLArgs> & Pick<GraphQLArgs, 'schema'>,
+  variables?: VoteMutationVariables
+) {
+  return graphql({ ...graphqlArgs, source: VoteMutationSource, variableValues: variables }) as Promise<ExecutionResult<VoteMutation>>
+};"
+`;

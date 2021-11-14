@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Graphql-codegen-operations-safelist Plugin Client whitelist Should have queries and mutations name as keys 1`] = `
+Array [
+  "onCommentAdded",
+  "Comment",
+  "CurrentUserForProfile",
+  "Feed",
+  "submitRepository",
+  "submitComment",
+  "vote",
+  "version",
+]
+`;
+
+exports[`Graphql-codegen-operations-safelist Plugin Server whitelist Should have operations definitions as values 1`] = `
+Array [
+  "subscription onCommentAdded($repoFullName: String!) {
+  commentAdded(repoFullName: $repoFullName) {
+    id
+    postedBy {
+      login
+      html_url
+      __typename
+    }
+    createdAt
+    content
+    __typename
+  }
+}",
+  "fragment CommentsPageComment on Comment {
+  id
+  postedBy {
+    login
+    html_url
+  }
+  createdAt
+  content
+}query Comment($repoFullName: String!, $limit: Int, $offset: Int) {
+  currentUser {
+    login
+    html_url
+    __typename
+  }
+  entry(repoFullName: $repoFullName) {
+    id
+    postedBy {
+      login
+      html_url
+      __typename
+    }
+    createdAt
+    comments(limit: $limit, offset: $offset) {
+      ...CommentsPageComment
+      __typename
+    }
+    commentCount
+    repository {
+      full_name
+      html_url
+      ... on Repository {
+        description
+        open_issues_count
+        stargazers_count
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}",
+  "query CurrentUserForProfile {
+  currentUser {
+    login
+    avatar_url
+    __typename
+  }
+}",
+  "fragment FeedEntry on Entry {
+  id
+  commentCount
+  repository {
+    full_name
+    html_url
+    owner {
+      avatar_url
+    }
+  }
+  ...VoteButtons
+  ...RepoInfo
+},fragment VoteButtons on Entry {
+  score
+  vote {
+    vote_value
+  }
+},fragment RepoInfo on Entry {
+  createdAt
+  repository {
+    description
+    stargazers_count
+    open_issues_count
+  }
+  postedBy {
+    html_url
+    login
+  }
+}query Feed($type: FeedType!, $offset: Int, $limit: Int) {
+  currentUser {
+    login
+    __typename
+  }
+  feed(type: $type, offset: $offset, limit: $limit) {
+    ...FeedEntry
+    __typename
+  }
+}",
+  "mutation submitRepository($repoFullName: String!) {
+  submitRepository(repoFullName: $repoFullName) {
+    createdAt
+    __typename
+  }
+}",
+  "fragment CommentsPageComment on Comment {
+  id
+  postedBy {
+    login
+    html_url
+  }
+  createdAt
+  content
+}mutation submitComment($repoFullName: String!, $commentContent: String!) {
+  submitComment(repoFullName: $repoFullName, commentContent: $commentContent) {
+    ...CommentsPageComment
+    __typename
+  }
+}",
+  "mutation vote($repoFullName: String!, $type: VoteType!) {
+  vote(repoFullName: $repoFullName, type: $type) {
+    score
+    id
+    vote {
+      vote_value
+      __typename
+    }
+    __typename
+  }
+}",
+  "latest",
+]
+`;

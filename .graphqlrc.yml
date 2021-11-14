@@ -1,0 +1,8 @@
+projects:
+  app:
+    schema: ['api/generated/schema.graphql', 'app/src/**/*.tsx']
+    documents: 'app/src/**/*.tsx'
+
+  tests:
+    schema: ['api/generated/schema.graphql', 'api/tests/**/*.ts']
+    documents: ['app/src/**/*.tsx', 'api/tests/**/*.ts']

@@ -1,0 +1,36 @@
+overwrite: true
+schema: ['../api/generated/schema.graphql', 'src/**/*.tsx']
+documents: ['src/**/*.tsx']
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+      - named-operations-object
+      - typescript-apollo-client-helpers
+    config:
+      identifierName: ListAllOperations
+      scalars:
+        Date: 'string'
+      reactApolloVersion: 3
+      exportFragmentSpreadSubTypes: true
+      namingConvention:
+        enumValues: keep
+
+  src/generated/fragments.json:
+    plugins:
+      - fragment-matcher
+
+  src/generated/safelist.json:
+    plugins:
+      - '@graphql-example/graphql-codegen-operations-safelist':
+          output: client
+
+  ../api/generated/safelist.json:
+    plugins:
+      - '@graphql-example/graphql-codegen-operations-safelist':
+          output: server
