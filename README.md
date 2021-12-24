@@ -26,3 +26,7 @@ Then go to http://localhost:3000
 ```bash
 npm run test
 ```
+
+## License
+
+[MIT](./LICENSE)
