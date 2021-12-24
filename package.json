@@ -18,7 +18,7 @@
     "list": "pm2 ls",
     "pretest": "NODE_ENV=test npm run prisma -w api -- migrate reset -f --skip-seed --skip-generate",
     "test": "jest --runInBand",
-    "codegen": "ultra -r codegen",
+    "codegen": "npm run codegen -w api && npm run codegen -w app",
     "build:packages": "ultra _build:packages",
     "_build:packages": "npm run build -w packages/graphql-codegen-typescript-operations-tester && npm run build -w packages/graphql-codegen-operations-safelist",
     "lint": "ultra _lint",
