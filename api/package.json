@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "watch": "tsc -w --pretty --preserveWatchOutput",
-    "dev": "node --inspect=0.0.0.0:9229 --enable-source-maps --no-lazy -r dotenv-flow/config ./dist/src/app.js",
+    "dev": "node --inspect=0.0.0.0:9229 --enable-source-maps --no-lazy -r dotenv-flow/config ./dist/src",
     "codegen": "graphql-codegen --config codegen.yml",
     "lint:ts": "tsc",
     "prisma": "dotenv-flow -- prisma",
