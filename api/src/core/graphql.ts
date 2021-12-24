@@ -2,7 +2,6 @@ import { addMocksToSchema } from '@graphql-tools/mock'
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import { DocumentNode, graphql, GraphQLSchema } from 'graphql'
 import { DefaultState, Middleware } from 'koa'
-import { defaultsDeep } from 'lodash'
 import { ErrorCode } from '../../generated/graphql'
 import { Context } from './context'
 import { log } from './logger'
@@ -44,7 +43,7 @@ export function computeSchemas({ definitions, transformers = [] }: GraphqlOption
   let mockedSchema = addMocksToSchema({
     schema,
     resolvers: definitions.reduce(
-      (acc, { mockResolvers }) => (!!mockResolvers ? defaultsDeep(acc, mockResolvers) : acc),
+      (acc, { mockResolvers }) => (!mockResolvers ? acc : { ...acc, ...mockResolvers }),
       {}
     ),
     preserveResolvers: true,

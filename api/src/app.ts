@@ -1,4 +1,3 @@
-import cors from '@koa/cors'
 import Koa, { DefaultState } from 'koa'
 import bodyParser from 'koa-bodyparser'
 import helmet from 'koa-helmet'
@@ -26,13 +25,6 @@ export const graphqlOptions = {
 app.use(trustProxy())
 app.use(helmet())
 app.use(bodyParser())
-app.use(
-  cors({
-    origin: process.env.APP_URL,
-    credentials: true,
-    allowMethods: ['GET', 'POST'],
-  })
-)
 app.use(telemetryMiddleware({ serviceName: 'example' }))
 app.use(prismaMiddleware())
 app.use(sessionMiddleware())

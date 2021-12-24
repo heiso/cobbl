@@ -1,7 +1,6 @@
 import { Source } from '@graphql-tools/utils'
 import { readFileSync } from 'fs'
 import { buildClientSchema, parse } from 'graphql'
-import { every, some } from 'lodash'
 import { join, resolve } from 'path'
 import { hashQuery, plugin } from '..'
 
@@ -73,7 +72,7 @@ describe('Graphql-codegen-operations-safelist Plugin', () => {
       const { version, ...parsed }: Record<string, string> = JSON.parse(serverOutput)
       const hashes = Object.keys(parsed)
       expect(hashes.length).toBeGreaterThan(0)
-      expect(every(hashes, (hash) => hash === hashQuery(parsed[hash]))).toBeTruthy()
+      expect(hashes.every((hash) => hash === hashQuery(parsed[hash]))).toBeTruthy()
     })
 
     it('Should have operations definitions as values', async () => {
@@ -87,7 +86,7 @@ describe('Graphql-codegen-operations-safelist Plugin', () => {
       const { version, ...parsed }: Record<string, string> = JSON.parse(serverOutput)
       const queries = Object.values(parsed)
       expect(queries.length).toBeGreaterThan(0)
-      expect(every(queries, (query) => query.includes('__typename'))).toBeTruthy()
+      expect(queries.every((query) => query.includes('__typename'))).toBeTruthy()
     })
 
     it('Should be able to remove __typenames', async () => {
@@ -101,7 +100,7 @@ describe('Graphql-codegen-operations-safelist Plugin', () => {
       )
       const queries = Object.values(parsed)
       expect(queries.length).toBeGreaterThan(0)
-      expect(some(queries, (query) => query.includes('__typename'))).toBeFalsy()
+      expect(queries.some((query) => query.includes('__typename'))).toBeFalsy()
     })
   })
 
@@ -122,7 +121,7 @@ describe('Graphql-codegen-operations-safelist Plugin', () => {
       const { version, ...parsed }: Record<string, string> = JSON.parse(clientOutput)
       const names = Object.keys(parsed)
       expect(names.length).toBeGreaterThan(0)
-      expect(every(names, (name) => !!parsed[name])).toBeTruthy()
+      expect(names.every((name) => !!parsed[name])).toBeTruthy()
     })
   })
 
@@ -141,7 +140,7 @@ describe('Graphql-codegen-operations-safelist Plugin', () => {
       const names = Object.keys(clientParsed)
       expect(names.length).toBeGreaterThan(0)
       expect(
-        every(names, (name) => {
+        names.every((name) => {
           const clientHash = clientParsed[name]
           const query = serverParsed[clientHash]
           return clientHash === hashQuery(query)
