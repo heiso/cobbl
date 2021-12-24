@@ -58,6 +58,7 @@ describe('Graphql-codegen-operations-safelist Plugin', () => {
       `),
     }
     const output = await plugin(schema, [document], { output: 'client' })
+    expect(serverOutput).toBeDefined()
     JSON.parse(output)
   })
 
