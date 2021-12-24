@@ -9,7 +9,6 @@ tsconfig.tsbuildinfo
 .npmrc
 .vscode/.*.redis
 .docker-volumes
-.env
 .env.local
 .env.*.local
 .eslintcache*
