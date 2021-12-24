@@ -3,11 +3,11 @@ import {
   Resolvers,
   testGetPublicAndPrivateQuery,
   testMutatePublicThenPrivateMutation,
-} from '../generated/graphql.test'
-import { graphqlOptions } from '../src/app'
-import { computeSchemas } from '../src/core/graphql'
-import { getArgs } from './graphql'
-import { prisma } from './prisma'
+} from '../../generated/graphql.test'
+import { graphqlOptions } from '../app'
+import { computeSchemas } from '../core/graphql'
+import { getArgs } from '../core/__tests__/graphql'
+import { prisma } from '../core/__tests__/prisma'
 
 const typeDefs = gql`
   type Test {

@@ -16,7 +16,7 @@ export default {
       ...common,
       displayName: 'api',
       rootDir: './api',
-      setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
+      setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
     },
     {
       ...common,

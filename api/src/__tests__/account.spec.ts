@@ -1,8 +1,12 @@
 import { gql } from 'graphql-tag'
-import { testAccountQuery, testLoginMutation, testSignupMutation } from '../generated/graphql.test'
-import { generateHash } from '../src/core/password'
-import { getArgs } from './graphql'
-import { prisma } from './prisma'
+import {
+  testAccountQuery,
+  testLoginMutation,
+  testSignupMutation,
+} from '../../generated/graphql.test'
+import { generateHash } from '../core/password'
+import { getArgs } from '../core/__tests__/graphql'
+import { prisma } from '../core/__tests__/prisma'
 
 gql`
   query Account {

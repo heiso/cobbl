@@ -31,8 +31,8 @@ generates:
           content: 'export { Resolvers as MockResolvers }'
 
   generated/graphql.test.ts:
-    schema: ['src/**/*schema.ts', 'tests/**/*.spec.ts']
-    documents: 'tests/**/*.spec.ts'
+    schema: ['src/**/*.schema.ts', 'src/**/*.spec.ts']
+    documents: 'src/**/*.spec.ts'
     config:
       contextType: '../src/core/context#Context'
       noSchemaStitching: true
@@ -47,7 +47,7 @@ generates:
       - '@graphql-example/graphql-codegen-typescript-operations-tester'
 
   generated/schema.graphql:
-    schema: 'src/**/*schema.ts'
+    schema: ['src/**/*.schema.ts', 'src/**/*.spec.ts']
     plugins:
       - schema-ast
     config:

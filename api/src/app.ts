@@ -8,13 +8,14 @@ import * as account from './account.schema'
 import { authenticationMiddleware, authenticationSchemaTransformer } from './core/authentication'
 import { Context } from './core/context'
 import { graphqlMiddleware } from './core/graphql'
+import { log } from './core/logger'
 import { prismaMiddleware } from './core/prisma'
 import { sessionMiddleware } from './core/session'
 import { telemetryMiddleware } from './core/telemetry'
 import * as root from './root.schema'
 import * as todo from './todo.schema'
 
-export const app = new Koa<DefaultState, Context>()
+const app = new Koa<DefaultState, Context>()
 
 export const graphqlOptions = {
   definitions: [root, todo, account],
@@ -38,3 +39,7 @@ app.use(prismaMiddleware())
 app.use(sessionMiddleware())
 app.use(authenticationMiddleware())
 app.use(graphqlMiddleware(graphqlOptions))
+
+app.listen({ port: Number(process.env.PORT) }, () => {
+  log.info(`🚀 To infinity...and beyond!`)
+})

@@ -94,13 +94,3 @@ export const resolvers: Resolvers = {
     },
   },
 }
-
-// export const mockResolvers: MockResolvers = {
-//   Query: {
-//     async account(root, args, { auth }) {
-//       const user = { id: randomUUID(), email: faker.internet.email() }
-//       await auth.login(user)
-//       return user
-//     },
-//   },
-// }

@@ -1,5 +1,5 @@
-import { isRateLimited } from '../src/core/rateLimiter'
-import { redis } from '../src/core/redis'
+import { isRateLimited } from '../rateLimiter'
+import { redis } from '../redis'
 
 describe('Security', () => {
   describe('isRateLimited', () => {

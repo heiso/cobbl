@@ -2,9 +2,9 @@ import { Source } from '@graphql-tools/utils'
 import { readFileSync } from 'fs'
 import { buildClientSchema, parse } from 'graphql'
 import { join, resolve } from 'path'
-import { plugin } from '../src'
+import { plugin } from '..'
 
-const githuntPath = resolve(__dirname, '../../graphql-codegen-core/githunt/')
+const githuntPath = resolve(__dirname, '../../../graphql-codegen-core/githunt/')
 
 function getDocument(name: string): Source {
   return {

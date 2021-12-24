@@ -3,9 +3,9 @@ import { readFileSync } from 'fs'
 import { buildClientSchema, parse } from 'graphql'
 import { every, some } from 'lodash'
 import { join, resolve } from 'path'
-import { hashQuery, plugin } from '../src'
+import { hashQuery, plugin } from '..'
 
-const githuntPath = resolve(__dirname, '../../graphql-codegen-core/githunt/')
+const githuntPath = resolve(__dirname, '../../../graphql-codegen-core/githunt/')
 
 function getDocument(name: string): Source {
   return {

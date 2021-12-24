@@ -1,10 +1,10 @@
 import { User } from '@prisma/client'
-import { graphqlOptions } from '../src/app'
-import { Authentication } from '../src/core/authentication'
-import { Context } from '../src/core/context'
-import { computeSchemas } from '../src/core/graphql'
-import { prisma } from '../src/core/prisma'
-import { Session } from '../src/core/session'
+import { graphqlOptions } from '../../app'
+import { Authentication } from '../authentication'
+import { Context } from '../context'
+import { computeSchemas } from '../graphql'
+import { Session } from '../session'
+import { prisma } from './prisma'
 
 type Options = {
   asUser?: User
