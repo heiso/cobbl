@@ -1,0 +1,21 @@
+{
+  "name": "@graphql-example/graphql-codegen-operations-safelist",
+  "version": "0.0.0",
+  "main": "dist",
+  "types": "src",
+  "scripts": {
+    "postinstall": "npm run build",
+    "build": "tsc -b tsconfig.build.json",
+    "lint:ts": "tsc"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.3.0",
+    "@graphql-codegen/typescript": "^2.4.1",
+    "@graphql-codegen/typescript-operations": "^2.2.1",
+    "graphql": "^16.1.0"
+  },
+  "dependencies": {
+    "@graphql-codegen/plugin-helpers": "^2.2.0",
+    "@graphql-example/graphql-codegen-core": "file:../graphql-codegen-core"
+  }
+}

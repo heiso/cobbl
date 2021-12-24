@@ -1,0 +1,54 @@
+overwrite: true
+schema: ['src/**/*schema.ts']
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+generates:
+  generated/graphql.ts:
+    config:
+      contextType: '../src/core/context#Context'
+      noSchemaStitching: true
+      namingConvention:
+        enumValues: keep
+      enumsAsConst: true
+      defaultMapper: Partial<{T}>
+    plugins:
+      - typescript
+      - typescript-resolvers
+
+  generated/graphql.mock.ts:
+    config:
+      contextType: '../src/core/context#Context'
+      noSchemaStitching: true
+      namingConvention:
+        enumValues: keep
+      enumsAsConst: true
+      defaultMapper: Partial<{T}>
+    plugins:
+      - typescript
+      - typescript-resolvers
+      - add:
+          content: 'export { Resolvers as MockResolvers }'
+
+  generated/graphql.test.ts:
+    schema: ['src/**/*schema.ts', 'tests/**/*.spec.ts']
+    documents: 'tests/**/*.spec.ts'
+    config:
+      contextType: '../src/core/context#Context'
+      noSchemaStitching: true
+      namingConvention:
+        enumValues: keep
+      enumsAsConst: true
+      defaultMapper: Partial<{T}>
+    plugins:
+      - typescript
+      - typescript-resolvers
+      - typescript-operations
+      - '@graphql-example/graphql-codegen-typescript-operations-tester'
+
+  generated/schema.graphql:
+    schema: 'src/**/*schema.ts'
+    plugins:
+      - schema-ast
+    config:
+      includeDirectives: true
