@@ -87,7 +87,6 @@ async function processSafelist(ctx: Context, { safelists = [], lazyLoadSafelist 
 
 async function processGraphql(ctx: Context, schema: GraphQLSchema, mockedSchema: GraphQLSchema) {
   const { body } = ctx.request
-  ctx.request.body
   const { query, operationName, variables, extensions } = body
 
   ctx.body = await graphql({
