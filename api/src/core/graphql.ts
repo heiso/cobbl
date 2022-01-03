@@ -65,6 +65,7 @@ async function processSafelist(ctx: Context, { safelists = [], lazyLoadSafelist 
   const safelist = ctx.request.body?.extensions?.safelist
 
   if (!safelist || !safelist.hash || !safelist.version) {
+    ctx.status = 403
     throw new Error(ErrorCode.FORBIDDEN)
   }
 
@@ -79,6 +80,7 @@ async function processSafelist(ctx: Context, { safelists = [], lazyLoadSafelist 
 
   const query = safelistsByVersion[version]?.[hash]
   if (!query) {
+    ctx.status = 403
     throw new Error(ErrorCode.FORBIDDEN)
   }
 

@@ -1,13 +1,17 @@
-import { gql } from '@apollo/client'
 import React from 'react'
+import { gql } from 'urql'
 import { useAccountQuery } from '../generated/graphql'
 import { Login } from './Login'
 
 gql`
+  fragment AccountForAuth on Account {
+    id
+    email
+  }
+
   query Account {
     account {
-      id
-      email
+      ...AccountForAuth
     }
   }
 `
@@ -17,9 +21,9 @@ type AuthProps = {
 }
 
 export function Auth({ children }: AuthProps) {
-  const { data, loading, called } = useAccountQuery()
+  const [{ data, fetching }] = useAccountQuery()
 
-  if (loading || !called) {
+  if (fetching) {
     return null
   } else if (data?.account) {
     return children

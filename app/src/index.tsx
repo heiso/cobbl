@@ -1,16 +1,16 @@
-import { ApolloProvider } from '@apollo/client'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'urql'
 import App from './App'
-import { client } from './core/apollo'
+import { client } from './core/graphql-client'
 import reportWebVitals from './core/reportWebVitals'
 import './index.css'
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
+    <Provider value={client}>
       <App />
-    </ApolloProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )

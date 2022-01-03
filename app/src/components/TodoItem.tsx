@@ -1,5 +1,5 @@
-import { gql } from '@apollo/client'
 import React from 'react'
+import { gql } from 'urql'
 import {
   TodoItemForTodoFragment,
   useRemoveTodoMutation,
@@ -29,23 +29,27 @@ type TodoItemProps = {
 }
 
 export function TodoItem({ todo }: TodoItemProps) {
-  const [updatetodo, updatetodoMutation] = useUpdateTodoMutation()
+  const [, updatetodo] = useUpdateTodoMutation()
 
-  const [removeTodo, removeTodoMutation] = useRemoveTodoMutation({
-    variables: { id: todo.id },
-    /**
-     * @todo find a way to type this
-     */
-    updateQueries: {
-      TodoList: (previousData, { mutationResult }) => {
-        if (!mutationResult.data) return previousData
+  /**
+   * @todo fix cache
+   */
+  //  {
+  //   variables: { id: todo.id },
+  //   /**
+  //    * @todo find a way to type this
+  //    */
+  //   updateQueries: {
+  //     TodoList: (previousData, { mutationResult }) => {
+  //       if (!mutationResult.data) return previousData
 
-        return {
-          todos: previousData.todos.filter((previousTodo) => previousTodo.id !== todo.id),
-        }
-      },
-    },
-  })
+  //       return {
+  //         todos: previousData.todos.filter((previousTodo) => previousTodo.id !== todo.id),
+  //       }
+  //     },
+  //   },
+  // }
+  const [removeTodoResult, removeTodo] = useRemoveTodoMutation()
 
   return (
     <li key={todo.id} className={todo.isCompleted ? 'done' : ''}>
@@ -56,11 +60,9 @@ export function TodoItem({ todo }: TodoItemProps) {
           type="button"
           onClick={async (event) => {
             event.preventDefault()
-            if (!updatetodoMutation.loading) {
+            if (!removeTodoResult.fetching) {
               await updatetodo({
-                variables: {
-                  input: { id: todo.id, label: todo.label, isCompleted: !todo.isCompleted },
-                },
+                input: { id: todo.id, label: todo.label, isCompleted: !todo.isCompleted },
               })
             }
           }}
@@ -74,8 +76,8 @@ export function TodoItem({ todo }: TodoItemProps) {
           type="button"
           onClick={async (event) => {
             event.preventDefault()
-            if (!removeTodoMutation.loading) {
-              await removeTodo()
+            if (!removeTodoResult.fetching) {
+              await removeTodo({ id: todo.id })
             }
           }}
         >

@@ -9,10 +9,14 @@ import { getArgs } from '../core/__tests__/graphql'
 import { prisma } from '../core/__tests__/prisma'
 
 gql`
+  fragment Account on Account {
+    id
+    email
+  }
+
   query Account {
     account {
-      id
-      email
+      ...Account
     }
   }
 
@@ -21,7 +25,9 @@ gql`
   }
 
   mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password)
+    login(email: $email, password: $password) {
+      ...Account
+    }
   }
 
   mutation logout {

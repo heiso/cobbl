@@ -1,26 +1,31 @@
-import { gql } from '@apollo/client'
 import React, { useState } from 'react'
+import { gql } from 'urql'
 import { useLoginMutation } from '../generated/graphql'
 
 gql`
   mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password)
+    login(email: $email, password: $password) {
+      ...AccountForAuth
+    }
   }
 `
 
 export function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [login, loginMutation] = useLoginMutation()
+  const [loginResult, login] = useLoginMutation()
 
   return (
     <form
       onSubmit={async (event) => {
         event.preventDefault()
-        if (!loginMutation.loading) {
-          const { data } = await login({ variables: { email, password } })
+        if (!loginResult.fetching) {
+          const { data } = await login({ email, password })
           if (data?.login) {
-            await loginMutation.client.resetStore()
+            /**
+             * @todo reset local store
+             */
+            // await loginResult.
           }
         }
       }}
