@@ -1,5 +1,5 @@
 overwrite: true
-schema: ['../api/generated/schema.graphql', 'src/**/*.tsx']
+schema: ['../api/src/**/*.schema.ts', 'src/**/*.tsx']
 documents: ['src/**/*.tsx']
 hooks:
   afterAllFileWrite:

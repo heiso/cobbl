@@ -1,6 +1,6 @@
 import { addMocksToSchema } from '@graphql-tools/mock'
 import { makeExecutableSchema } from '@graphql-tools/schema'
-import { DocumentNode, graphql, GraphQLSchema } from 'graphql'
+import { DocumentNode, graphql, GraphQLError, GraphQLSchema } from 'graphql'
 import { DefaultState, Middleware } from 'koa'
 import { ErrorCode } from '../../generated/graphql'
 import { Context } from './context'
@@ -98,7 +98,24 @@ async function processGraphql(ctx: Context, schema: GraphQLSchema, mockedSchema:
   })
 
   if (ctx.body.errors) {
-    log.error(ctx.body.errors)
+    const warnings: GraphQLError[] = []
+    const errors: GraphQLError[] = []
+
+    for (const error of ctx.body.errors) {
+      if (process.env.NODE_ENV !== 'production') {
+        error.extensions.stack = error.stack
+      }
+
+      if (error.message in ErrorCode) {
+        warnings.push(error)
+      } else {
+        errors.push(error)
+      }
+    }
+
+    if (errors.length) log.error(errors)
+
+    if (warnings.length) log.warn(warnings)
   }
 }
 
