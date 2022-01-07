@@ -22,10 +22,10 @@ export const graphqlOptions = {
   safelists: [safelist],
 }
 
+app.use(telemetryMiddleware({ service: 'example' }))
 app.use(trustProxy())
 app.use(helmet())
 app.use(bodyParser())
-app.use(telemetryMiddleware({ serviceName: 'example' }))
 app.use(prismaMiddleware())
 app.use(sessionMiddleware())
 app.use(authenticationMiddleware())

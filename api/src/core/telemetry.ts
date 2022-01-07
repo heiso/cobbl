@@ -7,19 +7,14 @@ import { log } from './logger'
 const SENSITIVE_KEYS = ['password', 'hashedPassword', 'pass', 'secure', 'secret']
 
 type Options = {
-  serviceName: string
+  service: string
   version?: string
 }
 
 type User = Record<string, unknown> & { email: string }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function isObjectWithToJSON(value: any): value is { toJSON: () => any } {
-  return value?.toJSON && typeof value.toJSON === 'function'
-}
-
 function isPlainObject(value: unknown): value is Record<string, unknown> {
-  return String(value) === '[object Object]'
+  return !!value && (typeof value === 'object' || typeof value === 'function')
 }
 
 function hasCircularStructure(value: unknown): boolean {
@@ -52,10 +47,6 @@ function secureValue(value: unknown): unknown {
 
   if (Array.isArray(value)) {
     return value.map((item: unknown) => secureValue(item))
-  }
-
-  if (isObjectWithToJSON(value)) {
-    return secureValue(value.toJSON())
   }
 
   if (isPlainObject(value)) {
@@ -93,14 +84,12 @@ function stringifyValue(value: unknown): string {
 export class Telemetry {
   public id: string
   public meta: Record<string, unknown>
-  public errors: Error[]
   public tags: Record<string, string>
   public user: User | null
 
-  constructor() {
-    this.id = randomUUID()
+  constructor(id: string = randomUUID()) {
+    this.id = id
     this.meta = {}
-    this.errors = []
     this.tags = { id: this.id }
     this.user = null
 
@@ -111,7 +100,6 @@ export class Telemetry {
     log.defaultMeta = {
       tags: this.tags,
       meta: this.meta,
-      errors: this.errors,
       user: this.user,
     }
   }
@@ -124,15 +112,6 @@ export class Telemetry {
     }
 
     this.meta[key] = securedValue
-
-    this.updateLoggerDefaultMeta()
-  }
-
-  setErrors(errors: Error[]) {
-    this.errors = [
-      ...this.errors,
-      ...(secureValue(errors.map((err) => ({ ...err, stack: err.stack }))) as Error[]),
-    ]
 
     this.updateLoggerDefaultMeta()
   }
@@ -154,52 +133,55 @@ export class Telemetry {
   }
 }
 
-/**
- * Log errors and warning asap
- * log and tracing are not the same. Do not mix everything.
- * What about log level ? is info too much ?
- * But logs can be used for perfs dashboards
- * maybe use Debug all the time and
- *
- * be more observability compliant
- */
-
-export function telemetryMiddleware(options: Options): Middleware<DefaultState, Context> {
+export function telemetryMiddleware({
+  service,
+  version,
+}: Options): Middleware<DefaultState, Context> {
   return async function telemetryMiddleware(ctx, next) {
-    ctx.onerror = (err) => {
-      if (err) {
-        log.error(err)
+    const start = Date.now()
+
+    let transactionId = ctx.headers['x-transaction-id']
+    if (Array.isArray(transactionId)) {
+      transactionId = transactionId[0]
+    }
+
+    const telemetry = new Telemetry(transactionId)
+    ctx.telemetry = telemetry
+
+    telemetry.setTag('service', service)
+    telemetry.setTag('version', version)
+
+    telemetry.setMeta('query', ctx.query)
+    telemetry.setMeta('headers', ctx.request.headers)
+    telemetry.setMeta('path', ctx.originalUrl)
+
+    if (ctx.request.path === '/health') {
+      ctx.body = { service, status: 'running', version }
+    }
+    let error: unknown
+
+    try {
+      await next()
+    } catch (err) {
+      if (err instanceof Error) {
+        error = err
+        ctx.body = err.message
+        ctx.status = ctx.status === 200 ? 500 : ctx.status
       }
     }
 
-    const start = Date.now()
-    const telemetry = new Telemetry()
-    const operationName = ctx.request.body?.operationName
+    const duration = Date.now() - start
 
-    ctx.telemetry = telemetry
-
-    telemetry.setTag('service', options.serviceName)
-    telemetry.setTag('version', options.version)
-
-    telemetry.setMeta('headers', ctx.request.headers)
+    telemetry.setMeta('ip', ctx.ip)
     telemetry.setMeta('body', ctx.request.body)
-    telemetry.setMeta('graphql', {
-      operationName,
-      query: ctx.request.body?.query,
-      variables: ctx.request.body?.variables,
-    })
+    telemetry.setMeta('status', ctx.response.status)
+    telemetry.setMeta('duration', duration)
 
-    if (ctx.request.path === '/health') {
-      ctx.body = { service: options.serviceName, status: 'running', version: options.version }
-    }
-
-    await next().finally(() => {
-      const duration = Date.now() - start
-
-      telemetry.setMeta('status', ctx.response.status)
-      telemetry.setMeta('duration', duration)
-
-      log.info(`${ctx.path}${operationName ? ` ${operationName}` : ''} -> ${duration}ms`)
-    })
+    log[!!error ? 'error' : 'info'](
+      `${ctx.method} ${ctx.path}${
+        ctx.request.body?.operationName ? ` ${ctx.request.body?.operationName}` : ''
+      } -> ${ctx.status}: ${duration}ms`,
+      error
+    )
   }
 }

@@ -8,18 +8,17 @@ const defaultFormat = format.combine(
 const developmentFormat = format.combine(
   defaultFormat,
   format.colorize(),
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   format.printf(({ timestamp, level, message, stack }) => {
     if (Array.isArray(message) && message.every((msg) => msg instanceof Error)) {
-      return `${timestamp} [${level}]: ${message.map(
-        (err: Error) => `${err.message}\n${err.stack}\n \n`
-      )}`
+      return `${message.map((err: Error) => `[${level}]: ${err.message}\n${err.stack}\n \n`)}`
     }
-    return `${timestamp} [${level}]: ${message}${stack ? `\n${stack}}\n` : ''}`
+    return `[${level}]: ${message}${stack ? `\n${stack}}\n` : ''}`
   })
 )
 
 export const log = createLogger({
-  level: 'info',
+  level: process.env.LOG_LEVEL || 'info',
   handleExceptions: true,
   format:
     process.env.NODE_ENV && ['development', 'test', 'ci'].includes(process.env.NODE_ENV)
