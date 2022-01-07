@@ -22,6 +22,14 @@ Then go to http://localhost:3000
 npm run test
 ```
 
+## Some references and or inspirations
+
+- [Bedrock](https://bedrock.mxstbr.com/)
+- [Colocation](https://kentcdodds.com/blog/colocation)
+- [Stop trying to be so DRY, instead Write Everything Twice (WET)](https://dev.to/wuz/stop-trying-to-be-so-dry-instead-write-everything-twice-wet-5g33)
+- [The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction)
+- [9 Ways to Secure Your Graph](https://youtu.be/nZSmcfSMuoE)
+
 ## License
 
 [MIT](./LICENSE)
