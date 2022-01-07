@@ -42,7 +42,6 @@ jobs:
       - name: Install
         run: |
           npm ci
-          npm run build:packages
           npm run prisma generate
           npm run codegen
 

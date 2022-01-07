@@ -11,6 +11,7 @@
     "packages/*"
   ],
   "scripts": {
+    "postinstall": "ultra _build:packages",
     "up": "docker-compose up -d && pm2 start ecosystem.config.js",
     "down": "pm2 delete ecosystem.config.js && docker-compose down",
     "restart": "pm2 delete ecosystem.config.js && pm2 start ecosystem.config.js",
@@ -35,7 +36,6 @@
     ]
   },
   "devDependencies": {
-    "@swc-node/register": "^1.4.2",
     "@swc/jest": "^0.2.15",
     "@types/jest": "^27.0.3",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
