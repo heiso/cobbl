@@ -48,6 +48,6 @@
     "prisma": "^3.7.0"
   },
   "prisma": {
-    "seed": "node -r @swc-node/register ./prisma/seed.ts"
+    "seed": "node ./dist/prisma/seed.js"
   }
 }

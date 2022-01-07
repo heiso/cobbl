@@ -1,16 +1,11 @@
-# Graphql-example
+# Cobl &middot; [![Tests](https://github.com/heiso/graphql-example/actions/workflows/test.yml/badge.svg)](https://github.com/heiso/graphql-example/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/heiso/graphql-example/branch/main/graph/badge.svg?token=QVNB8JCBJS)](https://codecov.io/gh/heiso/graphql-example) [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.dev)
 
-[![Tests](https://github.com/heiso/graphql-example/actions/workflows/test.yml/badge.svg)](https://github.com/heiso/graphql-example/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/heiso/graphql-example/branch/main/graph/badge.svg?token=QVNB8JCBJS)](https://codecov.io/gh/heiso/graphql-example)
-[![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.dev)
+Cobl is pronunced `ˈkäbəl`
 
 ## Install and first run
 
 ```bash
 npm i
-npm run build:packages
-npm run prisma generate
-npm run codegen
 npm run up
 npm run reset-database
 ```
