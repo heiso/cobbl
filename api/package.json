@@ -1,12 +1,12 @@
 {
-  "name": "@graphql-example/api",
+  "name": "@cobl/api",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "watch": "tsc -w --pretty --preserveWatchOutput",
     "dev": "node --inspect=0.0.0.0:9229 --enable-source-maps --no-lazy -r dotenv-flow/config ./dist/src",
     "codegen": "graphql-codegen --config codegen.yml",
-    "lint:ts": "tsc",
+    "lint:ts": "tsc --noEmit",
     "prisma": "dotenv-flow -- prisma",
     "reset-database": "dotenv-flow -- prisma migrate reset -f --skip-generate"
   },
@@ -23,7 +23,7 @@
     "koa-bodyparser": "^4.3.0",
     "koa-helmet": "^6.1.0",
     "koa-trust-proxy": "^0.1.4",
-    "winston": "^3.3.3"
+    "winston": "^3.3.4"
   },
   "devDependencies": {
     "@graphql-codegen/add": "^3.1.0",
@@ -32,7 +32,7 @@
     "@graphql-codegen/typescript": "^2.4.1",
     "@graphql-codegen/typescript-operations": "^2.2.1",
     "@graphql-codegen/typescript-resolvers": "^2.4.2",
-    "@graphql-example/graphql-codegen-typescript-operations-tester": "file:../packages/graphql-codegen-typescript-operations-tester",
+    "@cobl/graphql-codegen-typescript-operations-tester": "@cobl/graphql-codegen-typescript-operations-tester",
     "@types/dotenv-flow": "^3.2.0",
     "@types/faker": "^5.5.9",
     "@types/ioredis": "^4.28.5",

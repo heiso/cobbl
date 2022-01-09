@@ -1,10 +1,9 @@
 {
-  "name": "@graphql-example/graphql-codegen-operations-safelist",
+  "name": "@cobl/graphql-codegen-operations-safelist",
   "version": "0.0.0",
   "main": "dist",
   "types": "src",
   "scripts": {
-    "postinstall": "npm run build",
     "build": "tsc -b tsconfig.build.json",
     "lint:ts": "tsc"
   },
@@ -16,6 +15,9 @@
   },
   "dependencies": {
     "@graphql-codegen/plugin-helpers": "^2.3.1",
-    "@graphql-example/graphql-codegen-core": "file:../graphql-codegen-core"
+    "@cobl/graphql-codegen-core": "0.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

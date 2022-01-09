@@ -1,5 +1,5 @@
+import { FragmentMap, getFragmentFromOperation } from '@cobl/graphql-codegen-core'
 import { PluginFunction } from '@graphql-codegen/plugin-helpers'
-import { FragmentMap, getFragmentFromOperation } from '@graphql-example/graphql-codegen-core'
 import { pascalCase } from 'change-case-all'
 import { concatAST, DocumentNode, Kind, print, visit } from 'graphql'
 

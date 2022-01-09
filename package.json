@@ -1,5 +1,5 @@
 {
-  "name": "graphql-example",
+  "name": "cobl",
   "version": "0.0.0",
   "description": "",
   "author": "",
@@ -11,7 +11,7 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "ultra _build:packages",
+    "postinstall": "lerna bootstrap && npm run build:packages",
     "up": "docker-compose up -d && pm2 start ecosystem.config.js",
     "down": "pm2 delete ecosystem.config.js && docker-compose down",
     "restart": "pm2 delete ecosystem.config.js && pm2 start ecosystem.config.js",
@@ -20,8 +20,7 @@
     "pretest": "NODE_ENV=test npm run prisma -w api -- migrate reset -f --skip-seed --skip-generate",
     "test": "jest --runInBand",
     "codegen": "npm run codegen -w api && npm run codegen -w app",
-    "build:packages": "ultra _build:packages",
-    "_build:packages": "npm run build -w packages/graphql-codegen-typescript-operations-tester && npm run build -w packages/graphql-codegen-operations-safelist",
+    "build:packages": "npm run build -w packages/graphql-codegen-core && npm run build -w packages/graphql-codegen-typescript-operations-tester && npm run build -w packages/graphql-codegen-operations-safelist",
     "lint": "ultra _lint",
     "_lint": "npm run lint:prettier && npm run lint:eslint && npm run lint:ts --workspaces --if-present",
     "lint:prettier": "prettier --check .",
@@ -31,8 +30,7 @@
   },
   "ultra": {
     "concurrent": [
-      "_lint",
-      "_build:packages"
+      "_lint"
     ]
   },
   "devDependencies": {
@@ -47,6 +45,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.4.5",
+    "lerna": "^4.0.0",
     "pm2": "^5.1.2",
     "prettier": "^2.5.1",
     "prettier-plugin-organize-imports": "^2.3.4",
