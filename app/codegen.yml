@@ -9,21 +9,19 @@ generates:
     plugins:
       - typescript
       - typescript-operations
-      - typescript-react-apollo
-      - named-operations-object
-      - typescript-apollo-client-helpers
+      - typescript-urql
+      - typescript-urql-graphcache
     config:
       identifierName: ListAllOperations
       scalars:
         Date: 'string'
-      reactApolloVersion: 3
       exportFragmentSpreadSubTypes: true
       namingConvention:
         enumValues: keep
 
-  src/generated/fragments.json:
+  src/generated/schema.json:
     plugins:
-      - fragment-matcher
+      - urql-introspection
 
   src/generated/safelist.json:
     plugins:

@@ -1,5 +1,5 @@
-import { gql } from '@apollo/client'
 import React from 'react'
+import { gql } from 'urql'
 import { useTodoListQuery } from '../generated/graphql'
 import { TodoItem } from './TodoItem'
 
@@ -12,9 +12,9 @@ gql`
 `
 
 export function TodoList() {
-  const { data, loading } = useTodoListQuery()
+  const [{ data, fetching }] = useTodoListQuery()
 
-  if (loading) {
+  if (fetching) {
     return null
   } else if (data?.todos.length) {
     return <ul>{data && data.todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}</ul>

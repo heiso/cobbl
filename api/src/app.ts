@@ -18,7 +18,7 @@ export const app = new Koa<DefaultState, Context>()
 export const graphqlOptions = {
   definitions: [root, todo, account],
   transformers: [authenticationSchemaTransformer],
-  isSafelistEnabled: true,
+  isSafelistEnabled: false,
   safelists: [safelist],
 }
 

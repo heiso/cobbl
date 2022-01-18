@@ -1,5 +1,5 @@
-import { gql } from '@apollo/client'
 import React from 'react'
+import { gql } from 'urql'
 import { useAddTodoMutation } from '../generated/graphql'
 
 gql`
@@ -12,30 +12,29 @@ gql`
 
 export function TodoInput() {
   const [label, setLabel] = React.useState<string>('')
-  const [addTodo, addTodoMutation] = useAddTodoMutation({
-    /**
-     * @todo find a way to type this
-     * Maybe use merge methods defined in apolloclient
-     * node_modules/@apollo/client/core/types.d.ts L.48 and L.53
-     */
-    updateQueries: {
-      TodoList: (previousData, { mutationResult }) => {
-        if (!mutationResult.data) return previousData
+  /**
+   * @todo fix cache
+   */
+  // {
+  //   updateQueries: {
+  //     TodoList: (previousData, { mutationResult }) => {
+  //       if (!mutationResult.data) return previousData
 
-        return {
-          todos: [...previousData.todos, mutationResult.data.addTodo],
-        }
-      },
-    },
-  })
+  //       return {
+  //         todos: [...previousData.todos, mutationResult.data.addTodo],
+  //       }
+  //     },
+  //   },
+  // }
+  const [addTodoResult, addTodo] = useAddTodoMutation()
 
   return (
     <form
       onSubmit={async (event) => {
         event.preventDefault()
-        if (!addTodoMutation.loading && label != '') {
+        if (!addTodoResult.fetching && label != '') {
           setLabel('')
-          await addTodo({ variables: { label } })
+          await addTodo({ label })
         }
       }}
     >

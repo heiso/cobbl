@@ -12,13 +12,17 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.6",
+    "@graphql-codegen/typescript-urql-graphcache": "^2.2.3",
+    "@graphql-codegen/urql-introspection": "^2.1.1",
     "@types/node": "^17.0.4",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "@urql/exchange-graphcache": "^4.3.6",
     "graphql": "^16.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "typescript": "^4.5.4",
+    "urql": "^2.0.6",
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
@@ -29,7 +33,9 @@
     "@graphql-codegen/typescript-apollo-client-helpers": "^2.1.8",
     "@graphql-codegen/typescript-operations": "^2.2.1",
     "@graphql-codegen/typescript-react-apollo": "^3.2.2",
+    "@graphql-codegen/typescript-urql": "^3.4.2",
     "@graphql-example/graphql-codegen-operations-safelist": "file:../packages/graphql-codegen-operations-safelist",
+    "@urql/devtools": "^2.0.3",
     "graphql": "^16.1.0",
     "react-scripts": "5.0.0"
   },

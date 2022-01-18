@@ -20,7 +20,7 @@ export const typeDefs = gql`
 
   extend type Mutation {
     signup(email: String!, password: String!): Boolean! @isPublic
-    login(email: String!, password: String!): Boolean! @isPublic
+    login(email: String!, password: String!): Account @isPublic
     logout: Boolean!
   }
 `
@@ -70,10 +70,7 @@ export const resolvers: Resolvers = {
         throw new Error(ErrorCode.BAD_USER_INPUT)
       }
 
-      const user = await prisma.user.findFirst({
-        where: { email },
-        select: { hashedPassword: true, id: true },
-      })
+      const user = await prisma.user.findFirst({ where: { email } })
 
       if (!user || !user.hashedPassword) {
         fakePasswordTest()
@@ -84,7 +81,7 @@ export const resolvers: Resolvers = {
         }
 
         await auth.login(user)
-        return true
+        return user
       }
     },
 

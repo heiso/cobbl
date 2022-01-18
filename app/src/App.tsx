@@ -2,7 +2,6 @@ import React from 'react'
 import { Auth } from './components/Auth'
 import { TodoInput } from './components/TodoInput'
 import { TodoList } from './components/TodoList'
-import { ToggleMock } from './components/ToggleMock'
 
 function App() {
   return (
@@ -17,7 +16,7 @@ function App() {
           </div>
         </Auth>
       </main>
-      <ToggleMock />
+      {/* <ToggleMock /> */}
     </div>
   )
 }
