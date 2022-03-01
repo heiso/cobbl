@@ -1,4 +1,4 @@
-# Cobl &middot; [![Tests](https://github.com/heiso/cobl/actions/workflows/test.yml/badge.svg)](https://github.com/heiso/cobl/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/heiso/cobl/branch/master/graph/badge.svg?token=kbpSrmmRbC)](https://codecov.io/gh/heiso/cobl) [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.dev)
+# Cobbl &middot; [![Tests](https://github.com/heiso/cobbl/actions/workflows/test.yml/badge.svg)](https://github.com/heiso/cobbl/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/heiso/cobbl/branch/master/graph/badge.svg?token=kbpSrmmRbC)](https://codecov.io/gh/heiso/cobbl) [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.dev)
 
 Cobl is pronunced `ˈkäbəl`
 
