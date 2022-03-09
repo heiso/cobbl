@@ -1,6 +1,6 @@
-# Cobbl &middot; [![Tests](https://github.com/heiso/cobbl/actions/workflows/test.yml/badge.svg)](https://github.com/heiso/cobbl/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/heiso/cobbl/branch/master/graph/badge.svg?token=kbpSrmmRbC)](https://codecov.io/gh/heiso/cobbl) [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.dev)
+# Cobbl &middot; [![Tests](https://github.com/heiso/cobbl/actions/workflows/test.yml/badge.svg)](https://github.com/heiso/cobbl/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/heiso/cobbl/branch/master/graph/badge.svg?token=kbpSrmmRbC)](https://codecov.io/gh/heiso/cobbl) [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.dev) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
-Cobl is pronunced `ˈkäbəl`
+Cobbl is pronunced `ˈkäbəl`
 
 ## Install and first run
 

@@ -44,7 +44,7 @@ generates:
       - typescript
       - typescript-resolvers
       - typescript-operations
-      - '@graphql-example/graphql-codegen-typescript-operations-tester'
+      - '@cobbl/graphql-codegen-typescript-operations-tester'
 
   generated/schema.graphql:
     schema: ['src/**/*.schema.ts', 'src/**/*.spec.ts']

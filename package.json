@@ -1,5 +1,5 @@
 {
-  "name": "graphql-example",
+  "name": "cobbl",
   "version": "0.0.0",
   "description": "",
   "author": "",
@@ -11,7 +11,7 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "ultra _build:packages",
+    "postinstall": "lerna bootstrap && npm run build:packages",
     "up": "docker-compose up -d && pm2 start ecosystem.config.js",
     "down": "pm2 delete ecosystem.config.js && docker-compose down",
     "restart": "pm2 delete ecosystem.config.js && pm2 start ecosystem.config.js",
@@ -20,38 +20,39 @@
     "pretest": "NODE_ENV=test npm run prisma -w api -- migrate reset -f --skip-seed --skip-generate",
     "test": "jest --runInBand",
     "codegen": "npm run codegen -w api && npm run codegen -w app",
-    "build:packages": "ultra _build:packages",
-    "_build:packages": "npm run build -w packages/graphql-codegen-typescript-operations-tester && npm run build -w packages/graphql-codegen-operations-safelist",
+    "build:packages": "npm run build -w packages/graphql-codegen-core && npm run build -w packages/graphql-codegen-typescript-operations-tester && npm run build -w packages/graphql-codegen-operations-safelist",
     "lint": "ultra _lint",
     "_lint": "npm run lint:prettier && npm run lint:eslint && npm run lint:ts --workspaces --if-present",
     "lint:prettier": "prettier --check .",
     "lint:eslint": "eslint .",
     "prisma": "npm run -w api prisma",
-    "reset-database": "npm run -w api reset-database"
+    "reset-database": "npm run -w api reset-database",
+    "version": "lerna version"
   },
   "ultra": {
     "concurrent": [
-      "_lint",
-      "_build:packages"
+      "_lint"
     ]
   },
   "devDependencies": {
-    "@swc/jest": "^0.2.15",
-    "@types/jest": "^27.0.3",
-    "@typescript-eslint/eslint-plugin": "^5.8.0",
-    "@typescript-eslint/parser": "^5.8.0",
-    "eslint": "^8.5.0",
-    "eslint-config-prettier": "^8.3.0",
+    "@swc/core": "^1.2.151",
+    "@swc/jest": "^0.2.20",
+    "@types/jest": "^27.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react": "^7.29.3",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "jest": "^27.4.5",
-    "pm2": "^5.1.2",
+    "jest": "^27.5.1",
+    "lerna": "^4.0.0",
+    "pm2": "^5.2.0",
     "prettier": "^2.5.1",
     "prettier-plugin-organize-imports": "^2.3.4",
-    "prettier-plugin-prisma": "^3.7.0",
-    "typescript": "^4.5.4",
+    "prettier-plugin-prisma": "^3.10.0",
+    "typescript": "^4.6.2",
     "ultra-runner": "^3.10.5"
   }
 }
