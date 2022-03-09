@@ -1,8 +1,12 @@
 {
   "name": "@cobbl/graphql-codegen-typescript-operations-tester",
-  "version": "0.0.3",
+  "version": "0.0.0",
   "main": "dist",
   "types": "src",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heiso/cobbl.git"
+  },
   "scripts": {
     "build": "tsc -b tsconfig.build.json",
     "lint:ts": "tsc"
@@ -14,7 +18,7 @@
     "graphql": "^16.3.0"
   },
   "dependencies": {
-    "@cobbl/graphql-codegen-core": "^0.0.3",
+    "@cobbl/graphql-codegen-core": "^0.0.0",
     "@graphql-codegen/plugin-helpers": "^2.4.2",
     "change-case-all": "^1.0.14"
   },
