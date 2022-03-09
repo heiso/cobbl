@@ -1,6 +1,6 @@
 {
   "name": "@cobbl/app",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
@@ -22,6 +22,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@cobbl/graphql-codegen-operations-safelist": "@cobbl/graphql-codegen-operations-safelist",
     "@graphql-codegen/cli": "^2.6.2",
     "@graphql-codegen/fragment-matcher": "^3.2.1",
     "@graphql-codegen/named-operations-object": "^2.2.1",
@@ -29,7 +30,6 @@
     "@graphql-codegen/typescript-apollo-client-helpers": "^2.1.13",
     "@graphql-codegen/typescript-operations": "^2.3.3",
     "@graphql-codegen/typescript-react-apollo": "^3.2.9",
-    "@cobbl/graphql-codegen-operations-safelist": "@cobbl/graphql-codegen-operations-safelist",
     "graphql": "^16.3.0",
     "react-scripts": "5.0.0"
   },

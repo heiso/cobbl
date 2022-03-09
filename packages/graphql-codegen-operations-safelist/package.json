@@ -1,6 +1,6 @@
 {
   "name": "@cobbl/graphql-codegen-operations-safelist",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "main": "dist",
   "types": "src",
   "scripts": {
@@ -14,8 +14,8 @@
     "graphql": "^16.3.0"
   },
   "dependencies": {
-    "@graphql-codegen/plugin-helpers": "^2.4.2",
-    "@cobbl/graphql-codegen-core": "0.0.0"
+    "@cobbl/graphql-codegen-core": "^0.0.3",
+    "@graphql-codegen/plugin-helpers": "^2.4.2"
   },
   "publishConfig": {
     "access": "public"
