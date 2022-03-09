@@ -1,5 +1,5 @@
 {
-  "name": "@cobl/app",
+  "name": "@cobbl/app",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -29,7 +29,7 @@
     "@graphql-codegen/typescript-apollo-client-helpers": "^2.1.8",
     "@graphql-codegen/typescript-operations": "^2.2.1",
     "@graphql-codegen/typescript-react-apollo": "^3.2.2",
-    "@cobl/graphql-codegen-operations-safelist": "@cobl/graphql-codegen-operations-safelist",
+    "@cobbl/graphql-codegen-operations-safelist": "@cobbl/graphql-codegen-operations-safelist",
     "graphql": "^16.1.0",
     "react-scripts": "5.0.0"
   },

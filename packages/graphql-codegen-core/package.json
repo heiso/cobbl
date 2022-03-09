@@ -1,5 +1,5 @@
 {
-  "name": "@cobl/graphql-codegen-core",
+  "name": "@cobbl/graphql-codegen-core",
   "version": "0.0.0",
   "main": "dist",
   "types": "src",

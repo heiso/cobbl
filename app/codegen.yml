@@ -27,10 +27,10 @@ generates:
 
   src/generated/safelist.json:
     plugins:
-      - '@cobl/graphql-codegen-operations-safelist':
+      - '@cobbl/graphql-codegen-operations-safelist':
           output: client
 
   ../api/generated/safelist.json:
     plugins:
-      - '@cobl/graphql-codegen-operations-safelist':
+      - '@cobbl/graphql-codegen-operations-safelist':
           output: server

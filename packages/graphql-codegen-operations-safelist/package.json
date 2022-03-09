@@ -1,5 +1,5 @@
 {
-  "name": "@cobl/graphql-codegen-operations-safelist",
+  "name": "@cobbl/graphql-codegen-operations-safelist",
   "version": "0.0.0",
   "main": "dist",
   "types": "src",
@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@graphql-codegen/plugin-helpers": "^2.3.1",
-    "@cobl/graphql-codegen-core": "0.0.0"
+    "@cobbl/graphql-codegen-core": "0.0.0"
   },
   "publishConfig": {
     "access": "public"

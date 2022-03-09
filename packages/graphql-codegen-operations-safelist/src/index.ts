@@ -2,7 +2,7 @@ import {
   addTypenameToDocument,
   FragmentMap,
   getFragmentFromOperation,
-} from '@cobl/graphql-codegen-core'
+} from '@cobbl/graphql-codegen-core'
 import { PluginFunction, PluginValidateFn } from '@graphql-codegen/plugin-helpers'
 import { createHash } from 'crypto'
 import { concatAST, DocumentNode, Kind, print, visit } from 'graphql'
