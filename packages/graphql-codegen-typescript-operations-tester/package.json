@@ -8,13 +8,13 @@
     "lint:ts": "tsc"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.3.0",
-    "@graphql-codegen/typescript": "^2.4.1",
-    "@graphql-codegen/typescript-operations": "^2.2.1",
+    "@graphql-codegen/cli": "^2.3.1",
+    "@graphql-codegen/typescript": "^2.4.6",
+    "@graphql-codegen/typescript-operations": "^2.2.4",
     "graphql": "^16.2.0"
   },
   "dependencies": {
-    "@graphql-codegen/plugin-helpers": "^2.3.1",
+    "@graphql-codegen/plugin-helpers": "^2.3.2",
     "@cobbl/graphql-codegen-core": "0.0.0",
     "change-case-all": "^1.0.14"
   },

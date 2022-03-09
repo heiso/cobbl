@@ -34,23 +34,23 @@
     ]
   },
   "devDependencies": {
-    "@swc/jest": "^0.2.15",
+    "@swc/jest": "^0.2.20",
     "@types/jest": "^27.0.3",
-    "@typescript-eslint/eslint-plugin": "^5.8.0",
-    "@typescript-eslint/parser": "^5.8.0",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "jest": "^27.4.5",
+    "jest": "^27.4.7",
     "lerna": "^4.0.0",
     "pm2": "^5.1.2",
     "prettier": "^2.5.1",
     "prettier-plugin-organize-imports": "^2.3.4",
     "prettier-plugin-prisma": "^3.7.0",
-    "typescript": "^4.5.4",
+    "typescript": "^4.5.5",
     "ultra-runner": "^3.10.5"
   }
 }
