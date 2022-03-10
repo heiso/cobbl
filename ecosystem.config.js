@@ -9,26 +9,18 @@ module.exports = {
   apps: [
     {
       ...common,
-      name: 'codegen-api',
-      cwd: 'api',
-      script: 'npm run codegen -- --watch',
-      watch: ['codegen.yml'],
-    },
-
-    {
-      ...common,
-      name: 'prisma',
-      cwd: 'api',
-      script: 'npm run prisma generate',
-      watch: ['./prisma/schema.prisma'],
-    },
-
-    {
-      ...common,
-      name: 'build-api',
-      cwd: 'api',
-      script: 'npm run watch',
-      watch: ['./tsconfig.json', '../tsconfig.json', './.env.development'],
+      name: 'build',
+      script: 'npx turbo run build',
+      watch: [
+        './api/src/*',
+        './app/src/*',
+        './packages/*/src/*',
+        './**/codegen.yml',
+        './**/prisma/schema.prisma',
+        './**/tsconfig.json',
+        './**/tsconfig.build.json',
+        './**/.env.development',
+      ],
     },
 
     {
@@ -40,14 +32,6 @@ module.exports = {
       env: {
         NODE_ENV: 'development',
       },
-    },
-
-    {
-      ...common,
-      name: 'codegen-app',
-      cwd: 'app',
-      script: 'npm run codegen -- --watch',
-      watch: ['codegen.yml'],
     },
 
     {

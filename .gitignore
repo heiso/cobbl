@@ -1,12 +1,14 @@
 # Common generated folders
 node_modules
 dist
+build
 generated
 coverage
 tsconfig.tsbuildinfo
 
 # Common development files
 .npmrc
+.turbo
 .vscode/.*.redis
 .docker-volumes
 .env.local

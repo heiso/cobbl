@@ -18,6 +18,7 @@ jobs:
           registry-url: https://registry.npmjs.org
           scope: '@cobbl'
       - run: npm ci
+      - run: npx turbo build:packages
       - run: npx lerna publish from-package -y --no-verify-access
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

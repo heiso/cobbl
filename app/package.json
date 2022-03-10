@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test --all",
     "eject": "react-scripts eject",
     "codegen": "graphql-codegen --config codegen.yml",
-    "lint:ts": "tsc"
+    "lint": "tsc"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
@@ -31,7 +30,8 @@
     "@graphql-codegen/typescript-operations": "^2.3.4",
     "@graphql-codegen/typescript-react-apollo": "^3.2.10",
     "graphql": "^16.3.0",
-    "react-scripts": "5.0.0"
+    "react-scripts": "5.0.0",
+    "typescript": "^4.6.2"
   },
   "proxy": "http://localhost:4000",
   "browserslist": {
