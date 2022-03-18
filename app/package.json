@@ -6,7 +6,7 @@
     "start": "react-scripts start",
     "test": "react-scripts test --all",
     "eject": "react-scripts eject",
-    "codegen": "graphql-codegen --config codegen.yml",
+    "codegen:graphql": "graphql-codegen --config codegen.yml",
     "lint": "tsc"
   },
   "dependencies": {

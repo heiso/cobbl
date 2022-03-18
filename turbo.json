@@ -6,16 +6,19 @@
       "dependsOn": ["^build:packages"],
       "outputs": ["dist/**"]
     },
-    "codegen": {
+    "codegen:graphql": {
       "dependsOn": ["build:packages"],
-      "outputs": ["generated/**", "prisma/schema.prisma"]
+      "outputs": ["generated/**"]
+    },
+    "codegen:prisma": {
+      "outputs": ["node_modules/.prisma/client/*"]
     },
     "build:apps": {
-      "dependsOn": ["codegen"],
+      "dependsOn": ["codegen:graphql", "codegen:prisma"],
       "outputs": ["dist/**"]
     },
     "lint": {
-      "dependsOn": ["codegen"],
+      "dependsOn": ["codegen:graphql", "codegen:prisma"],
       "outputs": []
     }
   }
