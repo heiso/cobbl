@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "watch": "tsc -w --pretty --preserveWatchOutput",
+    "build:apps": "tsc --pretty",
     "dev": "node --inspect=0.0.0.0:9229 --enable-source-maps --no-lazy -r dotenv-flow/config ./dist/src",
-    "codegen": "graphql-codegen --config codegen.yml",
-    "lint:ts": "tsc --noEmit",
+    "codegen": "yarn prisma generate && graphql-codegen --config codegen.yml",
+    "lint": "tsc --noEmit",
     "prisma": "dotenv-flow -- prisma",
     "reset-database": "dotenv-flow -- prisma migrate reset -f --skip-generate"
   },
@@ -45,7 +45,8 @@
     "dotenv-flow-cli": "^1.0.0",
     "ioredis-mock": "^5.9.1",
     "node-mocks-http": "^1.11.0",
-    "prisma": "^3.10.0"
+    "prisma": "^3.10.0",
+    "typescript": "^4.6.2"
   },
   "prisma": {
     "seed": "node ./dist/prisma/seed.js"

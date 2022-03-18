@@ -42,8 +42,7 @@ jobs:
       - name: Install
         run: |
           npm ci
-          npm run prisma generate
-          npm run codegen
+          npx turbo run codegen
 
       - name: Lint
         run: npm run lint

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "baseBranch": "origin/master",
+  "pipeline": {
+    "build:packages": {
+      "dependsOn": ["^build:packages"],
+      "outputs": ["dist/**"]
+    },
+    "codegen": {
+      "dependsOn": ["build:packages"],
+      "outputs": ["generated/**", "prisma/schema.prisma"]
+    },
+    "build:apps": {
+      "dependsOn": ["codegen"],
+      "outputs": ["dist/**"]
+    },
+    "lint": {
+      "dependsOn": ["codegen"],
+      "outputs": []
+    }
+  }
+}

@@ -8,11 +8,12 @@
     "url": "https://github.com/heiso/cobbl.git"
   },
   "scripts": {
-    "build": "tsc -b tsconfig.build.json",
-    "lint:ts": "tsc"
+    "build:packages": "tsc -b tsconfig.build.json",
+    "lint": "tsc"
   },
   "devDependencies": {
-    "graphql": "^16.3.0"
+    "graphql": "^16.3.0",
+    "typescript": "^4.6.2"
   },
   "publishConfig": {
     "access": "public"
