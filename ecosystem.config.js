@@ -10,17 +10,18 @@ module.exports = {
     {
       ...common,
       name: 'build',
-      script: 'npx turbo run build',
+      script: 'npx turbo run build:apps',
       watch: [
         './api/src/*',
-        './app/src/*',
         './packages/*/src/*',
         './**/codegen.yml',
         './**/prisma/schema.prisma',
         './**/tsconfig.json',
         './**/tsconfig.build.json',
         './**/.env.development',
+        './package-lock.json',
       ],
+      ignore_watch: ['node_modules'],
     },
 
     {
