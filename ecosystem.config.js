@@ -10,10 +10,10 @@ module.exports = {
     {
       ...common,
       name: 'build',
-      script: 'npx turbo run build:apps',
+      script: 'npx turbo run build:apps --ignore="app"',
       watch: [
-        './api/src/*',
-        './packages/*/src/*',
+        './api/src/**/*',
+        './packages/*/src/**/*',
         './**/codegen.yml',
         './**/prisma/schema.prisma',
         './**/tsconfig.json',
@@ -37,10 +37,24 @@ module.exports = {
 
     {
       ...common,
+      name: 'app-codegen',
+      cwd: 'app',
+      script: 'npm run codegen:graphql',
+      watch: [
+        '../api/src/**/*.schema.ts',
+        '../packages/*/dist/**/*',
+        './codegen.yml',
+        './app/**/*.tsx',
+      ],
+      ignore_watch: ['node_modules'],
+    },
+
+    {
+      ...common,
       name: 'app',
       cwd: 'app',
-      script: 'npm run start',
-      watch: ['./tsconfig.json', '../tsconfig.json', './.env.development'],
+      script: 'npm run dev',
+      watch: ['./tsconfig.json', '../tsconfig.json'],
       env: {
         NODE_ENV: 'development',
       },

@@ -22,17 +22,9 @@
     {
       "files": ["*.tsx"],
       "parser": "@typescript-eslint/parser",
-      "settings": {
-        "react": {
-          "version": "detect"
-        }
-      },
       "extends": [
-        "plugin:@typescript-eslint/recommended",
-
-        "plugin:react/recommended",
-        "plugin:react-hooks/recommended",
-        "plugin:jsx-a11y/recommended",
+        "@remix-run/eslint-config",
+        "@remix-run/eslint-config/node",
 
         // prettier config will turn rules off according to prettier, it should always be at the end
         "prettier"

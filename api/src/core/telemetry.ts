@@ -181,7 +181,7 @@ export function telemetryMiddleware({
       `${ctx.method} ${ctx.path}${
         ctx.request.body?.operationName ? ` ${ctx.request.body?.operationName}` : ''
       } -> ${ctx.status}: ${duration}ms`,
-      error
+      error instanceof Error && error.cause ? error.cause : error
     )
   }
 }

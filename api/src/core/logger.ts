@@ -8,11 +8,7 @@ const defaultFormat = format.combine(
 const developmentFormat = format.combine(
   defaultFormat,
   format.colorize(),
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  format.printf(({ timestamp, level, message, stack }) => {
-    if (Array.isArray(message) && message.every((msg) => msg instanceof Error)) {
-      return `${message.map((err: Error) => `[${level}]: ${err.message}\n${err.stack}\n \n`)}`
-    }
+  format.printf(({ level, message, stack }) => {
     return `[${level}]: ${message}${stack ? `\n${stack}}\n` : ''}`
   })
 )

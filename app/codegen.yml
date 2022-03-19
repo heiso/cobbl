@@ -5,25 +5,19 @@ hooks:
   afterAllFileWrite:
     - prettier --write
 generates:
-  src/generated/graphql.tsx:
+  src/generated/graphql.ts:
     plugins:
       - typescript
       - typescript-operations
-      - typescript-react-apollo
-      - named-operations-object
-      - typescript-apollo-client-helpers
+      - ../node_modules/fork-typescript-generic-sdk
     config:
-      identifierName: ListAllOperations
+      rawRequest: true
+      skipTypename: true
       scalars:
         Date: 'string'
-      reactApolloVersion: 3
       exportFragmentSpreadSubTypes: true
       namingConvention:
         enumValues: keep
-
-  src/generated/fragments.json:
-    plugins:
-      - fragment-matcher
 
   src/generated/safelist.json:
     plugins:

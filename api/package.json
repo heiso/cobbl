@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build:apps": "tsc --pretty",
-    "dev": "node --inspect=0.0.0.0:9229 --enable-source-maps --no-lazy -r dotenv-flow/config ./dist/src",
+    "dev": "node --inspect=0.0.0.0:9230 --enable-source-maps --no-lazy -r dotenv-flow/config ./dist/src",
     "codegen:prisma": "yarn prisma generate",
     "codegen:graphql": "graphql-codegen --config codegen.yml",
     "lint": "tsc --noEmit",
