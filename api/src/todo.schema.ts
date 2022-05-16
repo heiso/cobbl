@@ -24,7 +24,7 @@ export const typeDefs = gql`
   extend type Mutation {
     addTodo(label: String!): Todo!
     removeTodo(id: ID!): Boolean!
-    updateTodo(input: TodoInput!): Todo!
+    setTodoIsCompleted(id: ID!, isCompleted: Boolean!): Todo!
   }
 `
 
@@ -45,13 +45,10 @@ export const resolvers: Resolvers = {
       return true
     },
 
-    updateTodo: (parent, { input }, { prisma }) => {
+    setTodoIsCompleted: (parent, { id, isCompleted }, { prisma }) => {
       return prisma.todo.update({
-        where: { id: input.id },
-        data: {
-          label: input.label,
-          isCompleted: input.isCompleted,
-        },
+        where: { id },
+        data: { isCompleted: isCompleted },
       })
     },
   },
@@ -81,11 +78,10 @@ export const mockResolvers: MockResolvers = {
 
     removeTodo: () => true,
 
-    updateTodo: (parent, { input }) => {
+    setTodoIsCompleted: (parent, { id, isCompleted }) => {
       return {
-        id: input.id,
-        label: input.label || undefined,
-        isCompleted: input.isCompleted || false,
+        id,
+        isCompleted: isCompleted,
       }
     },
   },

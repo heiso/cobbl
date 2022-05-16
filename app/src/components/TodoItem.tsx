@@ -1,10 +1,9 @@
-import { gql } from '@apollo/client'
-import React from 'react'
-import {
-  TodoItemForTodoFragment,
-  useRemoveTodoMutation,
-  useUpdateTodoMutation,
-} from '../generated/graphql'
+import { json, redirect } from '@remix-run/node'
+import { Form } from '@remix-run/react'
+import { gql } from 'graphql-tag'
+import { sdk } from '../core/graphql'
+import type { TodoItemForTodoFragment } from '../generated/graphql'
+import { ErrorCode } from '../generated/graphql'
 
 gql`
   fragment TodoItemForTodo on Todo {
@@ -13,8 +12,8 @@ gql`
     isCompleted
   }
 
-  mutation UpdateTodo($input: TodoInput!) {
-    updateTodo(input: $input) {
+  mutation SetTodoIsCompleted($id: ID!, $isCompleted: Boolean!) {
+    setTodoIsCompleted(id: $id, isCompleted: $isCompleted) {
       ...TodoItemForTodo
     }
   }
@@ -28,59 +27,73 @@ type TodoItemProps = {
   todo: TodoItemForTodoFragment
 }
 
+export async function handleSetTodoIsCompleted(form: FormData, request: Request) {
+  const id = form.get('id')
+  const isCompleted = form.get('isCompleted')
+
+  if (typeof id !== 'string') {
+    return json(null, { status: 400 })
+  }
+
+  const { errors, extensions } = await sdk.SetTodoIsCompleted(
+    { id, isCompleted: Boolean(Number(isCompleted)) },
+    { request }
+  )
+
+  if (errors?.some(({ message }) => message === ErrorCode.UNAUTHENTICATED)) {
+    return redirect('/login', { headers: extensions?.headers })
+  }
+
+  if (errors?.length) {
+    throw errors
+  }
+
+  return json(null, { headers: extensions?.headers })
+}
+
+export async function handleRemoveTodo(form: FormData, request: Request) {
+  const id = form.get('id')
+
+  if (!id || typeof id !== 'string') {
+    return json(null, { status: 500 })
+  }
+
+  const { errors, extensions } = await sdk.RemoveTodo({ id }, { request })
+
+  if (errors?.some(({ message }) => message === ErrorCode.UNAUTHENTICATED)) {
+    return redirect('/login', { headers: extensions?.headers })
+  }
+
+  if (errors?.length) {
+    throw errors
+  }
+
+  return json(null, { headers: extensions?.headers })
+}
+
 export function TodoItem({ todo }: TodoItemProps) {
-  const [updatetodo, updatetodoMutation] = useUpdateTodoMutation()
-
-  const [removeTodo, removeTodoMutation] = useRemoveTodoMutation({
-    variables: { id: todo.id },
-    /**
-     * @todo find a way to type this
-     */
-    updateQueries: {
-      TodoList: (previousData, { mutationResult }) => {
-        if (!mutationResult.data) return previousData
-
-        return {
-          todos: previousData.todos.filter((previousTodo) => previousTodo.id !== todo.id),
-        }
-      },
-    },
-  })
-
   return (
     <li key={todo.id} className={todo.isCompleted ? 'done' : ''}>
       <span className="label">{todo.label}</span>
       <div className="actions">
-        <button
-          className="btn-picto"
-          type="button"
-          onClick={async (event) => {
-            event.preventDefault()
-            if (!updatetodoMutation.loading) {
-              await updatetodo({
-                variables: {
-                  input: { id: todo.id, label: todo.label, isCompleted: !todo.isCompleted },
-                },
-              })
-            }
-          }}
-        >
-          <i className="material-icons">
-            {todo.isCompleted ? 'check_box' : 'check_box_outline_blank'}
-          </i>
-        </button>
-        <button
-          className="btn-picto"
-          type="button"
-          onClick={async (event) => {
-            event.preventDefault()
-            if (!removeTodoMutation.loading) {
-              await removeTodo()
-            }
-          }}
-        >
-          <i className="material-icons">delete</i>
-        </button>
+        <Form method="post">
+          <input type="hidden" name="mutation" value="SetTodoIsCompleted" />
+          <input type="hidden" name="id" value={todo.id} />
+          <input type="hidden" name="isCompleted" value={Number(!todo.isCompleted)} />
+          <button className="btn-picto" type="submit">
+            <i className="material-icons">
+              {todo.isCompleted ? 'check_box' : 'check_box_outline_blank'}
+            </i>
+          </button>
+        </Form>
+
+        <Form method="post">
+          <input type="hidden" name="mutation" value="RemoveTodo" />
+          <input type="hidden" name="id" value={todo.id} />
+          <button className="btn-picto" type="submit">
+            <i className="material-icons">delete</i>
+          </button>
+        </Form>
       </div>
     </li>
   )

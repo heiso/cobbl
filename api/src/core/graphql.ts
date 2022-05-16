@@ -85,9 +85,48 @@ async function processSafelist(ctx: Context, { safelists = [], lazyLoadSafelist 
   ctx.request.body.query = query
 }
 
+function getDeduplicatedErrors(errors: GraphQLError[]) {
+  return errors
+    .reduce<GraphQLError[]>((acc, error) => {
+      const existingError = error.stack && acc.find(({ stack }) => stack === error.stack)
+
+      if (!existingError) {
+        const newError = new GraphQLError(error.message, {
+          ...error,
+          path: undefined,
+          extensions: {
+            count: 1,
+            paths: [error.path],
+          },
+        })
+        newError.stack = error.stack
+        acc.push(newError)
+      } else {
+        existingError.extensions.count = Number(existingError.extensions.count) + 1
+        ;(existingError.extensions.paths as unknown[]).push(error.path)
+      }
+
+      return acc
+    }, [])
+    .map((error) => {
+      if (typeof error.extensions.count === 'number' && error.extensions.count > 1) {
+        error.message = `(x${error.extensions.count}) ${error.message}`
+      }
+      return error
+    })
+}
+
 async function processGraphql(ctx: Context, schema: GraphQLSchema, mockedSchema: GraphQLSchema) {
   const { body } = ctx.request
   const { query, operationName, variables, extensions } = body
+
+  if (typeof query !== 'string' || typeof operationName !== 'string') {
+    throw new Error(ErrorCode.INTERNAL_SERVER_ERROR, {
+      cause: new Error(
+        'body.query or body.operationName is invalid, did you forget to enable Safelist ?'
+      ),
+    })
+  }
 
   ctx.body = await graphql({
     schema: extensions?.mock ? mockedSchema : schema,
@@ -98,24 +137,13 @@ async function processGraphql(ctx: Context, schema: GraphQLSchema, mockedSchema:
   })
 
   if (ctx.body.errors) {
-    const warnings: GraphQLError[] = []
-    const errors: GraphQLError[] = []
-
-    for (const error of ctx.body.errors) {
-      if (process.env.NODE_ENV !== 'production') {
-        error.extensions.stack = error.stack
-      }
-
+    getDeduplicatedErrors([...ctx.body.errors]).forEach((error) => {
       if (error.message in ErrorCode) {
-        warnings.push(error)
+        log.warn(error)
       } else {
-        errors.push(error)
+        log.error(error)
       }
-    }
-
-    if (errors.length) log.error(errors)
-
-    if (warnings.length) log.warn(warnings)
+    })
   }
 }
 

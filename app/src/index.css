@@ -120,23 +120,27 @@ main .btn-picto {
 
 /* FORM */
 form {
+  display: inline;
+}
+.form {
+  display: block;
   margin-top: 3rem;
   display: flex;
   flex-wrap: wrap;
 }
-form label {
+.form label {
   min-width: 100%;
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
 }
-form input {
+.form input {
   flex-grow: 1;
   border: none;
   background: #f7f1f1;
   padding: 0 1.5em;
   font-size: initial;
 }
-form button {
+.form button {
   padding: 0 1.3rem;
   border: none;
   background: #ff6666;
@@ -148,11 +152,11 @@ form button {
   cursor: pointer;
   transition: background 0.2s ease-out;
 }
-form button:hover {
+.form button:hover {
   background: #ff5e5e;
 }
-form input,
-form button {
+.form input,
+.form button {
   font-family: 'Quicksand', sans-serif;
   height: 3rem;
 }
