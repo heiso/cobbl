@@ -1,5 +1,5 @@
+import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
-import faker from 'faker'
 import { gql } from 'graphql-tag'
 import { Resolvers } from '../generated/graphql'
 import { MockResolvers } from '../generated/graphql.mock'

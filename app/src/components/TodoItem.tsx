@@ -1,5 +1,4 @@
 import { gql } from '@apollo/client'
-import React from 'react'
 import {
   TodoItemForTodoFragment,
   useRemoveTodoMutation,

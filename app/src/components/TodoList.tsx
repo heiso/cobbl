@@ -1,5 +1,4 @@
 import { gql } from '@apollo/client'
-import React from 'react'
 import { useTodoListQuery } from '../generated/graphql'
 import { TodoItem } from './TodoItem'
 
