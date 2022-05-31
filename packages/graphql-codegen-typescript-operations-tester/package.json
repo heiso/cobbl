@@ -1,6 +1,6 @@
 {
   "name": "@cobbl/graphql-codegen-typescript-operations-tester",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist",
   "types": "src",
   "repository": {
@@ -18,7 +18,7 @@
     "typescript": "^4.7.2"
   },
   "dependencies": {
-    "@cobbl/graphql-codegen-core": "^0.1.0",
+    "@cobbl/graphql-codegen-core": "^0.1.1",
     "@graphql-codegen/plugin-helpers": "^2.4.2",
     "change-case-all": "^1.0.14"
   },
