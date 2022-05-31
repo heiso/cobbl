@@ -13,7 +13,7 @@ declare module 'process' {
           | 'silly'
           | undefined
         readonly PORT: string | undefined
-        readonly REDIS_URL: string | undefined
+        readonly REDIS_URL: string
         readonly DATABASE_URL: string | undefined
       }
     }

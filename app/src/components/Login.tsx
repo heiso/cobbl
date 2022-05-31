@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useLoginMutation } from '../generated/graphql'
 
 gql`

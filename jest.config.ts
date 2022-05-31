@@ -1,14 +1,15 @@
+import type { Config } from '@jest/types'
+
 const common = {
-  transform: {
-    '^.+\\.(t|j)sx?$': ['@swc/jest'],
-  },
+  preset: 'ts-jest',
   testEnvironment: 'node',
   clearMocks: true,
   testMatch: ['<rootDir>/**/*.spec.ts'],
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
 }
 
-export default {
+const config: Config.InitialOptions = {
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   collectCoverage: true,
   coverageReporters: ['lcov', 'text-summary'],
   projects: [
@@ -30,3 +31,5 @@ export default {
     },
   ],
 }
+
+export default config

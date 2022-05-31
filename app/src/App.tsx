@@ -1,4 +1,3 @@
-import React from 'react'
 import { Auth } from './components/Auth'
 import { TodoInput } from './components/TodoInput'
 import { TodoList } from './components/TodoList'
